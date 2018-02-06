@@ -17,6 +17,37 @@ public class Player {
 	public Room location;
 	public Avatars avatar;
 	
+	public int getHealth() {
+		return health;
+	}
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	public int getSocial() {
+		return social;
+	}
+	public void setSocial(int social) {
+		this.social = social;
+	}
+	public int getEducation() {
+		return education;
+	}
+	public void setEducation(int education) {
+		this.education = education;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	public float getMorality() {
+		return morality;
+	}
+	public void setMorality(float morality) {
+		this.morality = morality;
+	}
+	
 	
 	
 
