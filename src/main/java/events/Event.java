@@ -11,10 +11,7 @@ import gamelogic.Player;
 public interface Event {
 
 	public int effects[] = new int[4];
-	
-	void affectAttributes();;
-	
-	void affectMorality();
+
 	
 	
 }
