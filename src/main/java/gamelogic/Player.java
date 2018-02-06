@@ -16,6 +16,7 @@ public class Player {
 	private float morality;
 	public Room location;
 	public Avatars avatar;
+	private int energy;
 	
 	public int getHealth() {
 		return health;
@@ -46,6 +47,12 @@ public class Player {
 	}
 	public void setMorality(float morality) {
 		this.morality = morality;
+	}
+	public int getEnergy() {
+		return energy;
+	}
+	public void setEnergy(int energy) {
+		this.energy = energy;
 	}
 	
 	
