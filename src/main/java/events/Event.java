@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import gamelogic.Player;
 
 /**
- * The interface Event is for creating a structure that we can create multiple in game events from.
+ * The interface Event is for creating a structure that we can create multiple in-game events from.
  * @author Olivia Breen
  */
 public interface Event {
-
-	public int effects[] = new int[4];
-
 	
+	Object[] Event0 = new Object[7];
+	Object[] Event1 = new Object[7];
+	Object[] Event2 = new Object[7];
 	
 }
