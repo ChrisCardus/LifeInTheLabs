@@ -1,5 +1,7 @@
 package gamelogic;
 
+import java.awt.Point;
+
 import graphics.Avatars;
 
 /**
@@ -16,7 +18,7 @@ public class Player {
 	private float morality;
 	private int energy;
 	// the position variable is for the use of pathfinding and graphics and networking
-	public int position;
+	public Point position;
 	static public Avatars avatar;
 	static int userID;
 	static String username;
@@ -31,11 +33,12 @@ public class Player {
 		health = 50;
 		social = 50;
 		education = 0;
-		money = 1000;
+		money = 1700;
 		morality = 50;
 		energy = 100;
 		
-		//create default position
+		//Decide default position
+		position = new Point(1,1);
 	}
 
 	public int getHealth() {
@@ -86,7 +89,9 @@ public class Player {
 		this.energy = energy;
 	}
 	
-	
+	public int getID() {
+		return userID;
+	}
 	
 
 }
