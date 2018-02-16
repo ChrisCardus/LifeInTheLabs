@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import static networking.Commands.addPlayer;
+
 /**
  * Creates a new thread for each new client that connects.
  * @author Chris Cardus
@@ -13,6 +15,7 @@ import java.net.Socket;
 public class ServerThread extends Thread {
 	// Initialise the socked variable
 	private Socket socket = null;
+	String outLine;
 	
 	/**
 	 * Creates a new thread to handle a new client.
@@ -38,15 +41,36 @@ public class ServerThread extends Thread {
 			// What you get from the client.
 			String inLine = "";
 			// What you send to the client.
-			String outLine = "";
+			outLine = "";
 			
 			// While commands are coming from the server.
 			while((inLine = in.readLine()) != null) {
-				
+				recieve(inLine);
+				if(outLine != "") {
+				    out.println(outLine);
+				    outLine = "";
+                }
 			}
 		} catch(IOException e) {
 			System.out.println("Something went wrong with one of the server threads: " + e);
 			e.printStackTrace();
 		}
 	}
+
+    /**
+     * Used to parse the input from the client associated with each thread.
+     * @param input The input from the client.
+     */
+	private void recieve(String input) {
+		String[] commands = input.split("-");
+
+		if(commands[0] == addPlayer) {
+		    Multiplayer.addPlayer(commands[1], commands[2]);
+        }
+	}
+
+	public void send(String output) {
+        outLine = output;
+    }
+
 }

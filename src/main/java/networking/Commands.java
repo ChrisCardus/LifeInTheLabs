@@ -7,6 +7,9 @@ package networking;
  */
 public class Commands {
 
-	public static String stop = "stop";
+	private static String breakOP = "-";
+
+	public static final String stop = "stop"+breakOP;
+	public static final String addPlayer = "addPlayer";
 	
 }
