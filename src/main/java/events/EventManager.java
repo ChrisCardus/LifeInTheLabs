@@ -20,7 +20,7 @@ public class EventManager {
 		int n = random.nextInt(101);
 		if (n < 40) {
 			Object[] event = locationevents.GetEvent(location);
-			RunEvent(event);
+			RunEvent(event, player);
 			return true;
 		}
 		else {
@@ -29,7 +29,7 @@ public class EventManager {
 	}
 	
 	@SuppressWarnings("unused")
-	void RunEvent(Object[] event) {
+	void RunEvent(Object[] event, Player player) {
 		// Change attributes, signal to UI to display text box
 		// Object[1] = Health, 2 = Social, 3 = Education, 4 = Money, 5 = Morality, 6 = Energy, 7 = Text, 8 = Location
 		int healthchange = (int) event[1];
@@ -40,7 +40,22 @@ public class EventManager {
 		int energychange = (int) event[6];
 		String text = (String) event[7];
 		
-		// health = Player.getHealth(); how do I run this for the selected player? needs to be part of the method call?
+		int health = player.getHealth();
+		int social = player.getSocial();
+		int education = player.getEducation();
+		int money = player.getMoney();
+		float morality = player.getMorality();
+		int energy = player.getEnergy();
+		
+		health = health + healthchange;
+		social = social + socialchange;
+		education = education + educationchange;
+		money = money + moneychange;
+		morality = morality + moralitychange;
+		energy = energy + energychange;
+		
+		
+		
 	}
 
 }
