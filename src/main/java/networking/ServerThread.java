@@ -25,6 +25,7 @@ public class ServerThread extends Thread {
 	public ServerThread(Socket socket) {
 		super("ServerThread");
 		this.socket = socket;
+		System.out.println("Start Server");
 	}
 	
 	/**
@@ -65,7 +66,7 @@ public class ServerThread extends Thread {
 		String[] commands = input.split("-");
 
 		if(commands[0] == addPlayer) {
-		    Multiplayer.addPlayer(commands[1], commands[2]);
+		    //Multiplayer.addPlayer(commands[1], commands[2]);
         }
 	}
 

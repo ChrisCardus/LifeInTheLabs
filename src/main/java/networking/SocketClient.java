@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+
+import static networking.Commands.addPlayer;
+import static networking.Commands.breakOp;
 
 /**
  * Opens a client-side socket and attempts to connect to a specified server.
@@ -12,13 +16,19 @@ import java.net.Socket;
  */
 public class SocketClient {
 
+    String username;
+    int avatar;
+
 	/**
 	 * Open a socket and attempt to connect to a server.
 	 * @param address User specified IP address of a server.
 	 * @param port User specified port on the server.
 	 */
-	public void connect(String address, int port) {
-		this.openSocket(address, port);
+	public void connect(InetAddress address, int port, String username/*, Avatars avatar*/) {
+        System.out.println("Connect");
+        this.username = username;
+        this.openSocket(address, port);
+	    //this.avatar = avatar.toInt();
 	}
 	
 	/**
@@ -26,9 +36,12 @@ public class SocketClient {
 	 * Uses the default port 49100.
 	 * @param address User specified IP address of a server.
 	 */
-	public void connect(String address) {
+	public void connect(InetAddress address, String username/*, Avatars avatar*/) {
 		int defaultPort = 49100;
-		this.openSocket(address, defaultPort);
+        this.username = username;
+        System.out.println("Connect");
+        this.openSocket(address, defaultPort);
+        //this.avatar = avatar.toInt();
 	}
 	
 	/**
@@ -36,7 +49,7 @@ public class SocketClient {
 	 * @param address The IP address of the server.
 	 * @param port A port number on that server.
 	 */
-	private void openSocket(String address, int port) {
+	private void openSocket(InetAddress address, int port) {
 		try {
 			// Create a client side socket.
 			Socket clientSocket = new Socket(address, port);
@@ -49,12 +62,21 @@ public class SocketClient {
 			String inLine = "";
 			// What you send to the server.
 			String outLine = "";
+			boolean init = false;
 			
 			while((inLine = in.readLine()) != null) {
-				
+
+                System.out.println("Waiting for server");
+
+			    if(init = false) {
+			        outLine = addPlayer+breakOp+username+breakOp+avatar+breakOp;
+			        out.println(outLine);
+			        init = true;
+                }
+
 				if(inLine == Commands.stop) {
-					break;
-				}
+                    break;
+                }
 			}
 		} catch(IOException e) {
 			System.err.println("There is an error with the connection: " + e);

@@ -17,7 +17,8 @@ public class SocketServer{
      * @param port Specifies what port number to use.
      */
     public void startServer(int port) {
-    	this.openSocket(port);
+        System.out.println("Start Server");
+        this.openSocket(port);
     }
     
     /**
@@ -25,6 +26,7 @@ public class SocketServer{
      * Uses the default port 49100.
      */
     public void startServer() {
+        System.out.println("Start Server");
     	int defaultPort = 49100;
     	this.openSocket(defaultPort);
     }
@@ -36,31 +38,38 @@ public class SocketServer{
     private void openSocket(int port){
         // Catch any network errors that might occur.
         try {
+            System.out.println("Openning Socket");
         	// Create the server socket.
             ServerSocket serverSocket = new ServerSocket(port);
             
             // Listen for new clients.
             while(listening) {
             	// Create a new thread to deal with each client that tries to connect.
+                System.out.println("Listening");
             	new ServerThread(serverSocket.accept()).start();
+                System.out.println("Client Connected");
             }
 
         } catch (IOException e) {
             System.err.println("There is an error with socket: "+e);
         }
     }
-    
+
     /**
      * Stops new clients from being able to connect to the server.
      */
     public void stopListening() {
-    	listening = false;
+        listening = false;
     }
-    
+
     /**
      * Allows the server to listen for and connect to new clients.
      */
     public void startListening() {
-    	listening = true;
+        listening = true;
     }
+
+    /*public void send(String ouput) {
+        ServerThread.send("Test");
+    }*/
 }
