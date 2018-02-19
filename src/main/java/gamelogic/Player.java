@@ -18,7 +18,7 @@ public class Player {
 	private float morality;
 	private int energy;
 	// the position variable is for the use of pathfinding and graphics and networking
-	public Point position;
+	public Tile position;
 	static public Avatars avatar;
 	static int userID;
 	static String username;
@@ -38,7 +38,7 @@ public class Player {
 		energy = 100;
 		
 		//Decide default position
-		position = new Point(1,1);
+		position = new Tile(1,1);
 	}
 
 	public int getHealth() {
