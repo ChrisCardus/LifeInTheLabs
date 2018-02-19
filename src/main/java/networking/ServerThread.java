@@ -68,7 +68,7 @@ public class ServerThread extends Thread {
 		String[] commands = input.split("-");
 
 		if(commands[0] == addPlayer) {
-		    MultiplayerServer.addPlayer(commands[1], commands[2]);
+		    //MultiplayerServer.addPlayer(commands[1], commands[2]);
         }
 	}
 

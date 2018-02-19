@@ -6,13 +6,17 @@ public class Timer implements Runnable {
 	private long endTime = startTime + 600000;
 	private long time = startTime;
 	int test;
+	int seconds;
 	
 	
 	public void run() {
 		while(time < endTime) {
 			time = System.currentTimeMillis();
 			if(time % 1000 == 0) {
-			    timeLeft((int)time);
+			    if(seconds != (int)(endTime - time) / 1000) {
+                    seconds = (int)(endTime - time) / 1000;
+                    timeLeft(seconds);
+                }
             }
 		}
 		
