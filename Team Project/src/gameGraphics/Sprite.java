@@ -1,4 +1,4 @@
-package userInterface;
+package gameGraphics;
 
 // Animations (without state information) which are displayed. With this we can use the same animation in different places,without copying the image multiple times
 

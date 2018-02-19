@@ -1,7 +1,4 @@
-package lwjgl;
-
-import userInterface.Window;
-import userInterface.WindowCallback;
+package gameGraphics;
 
 import java.awt.event.KeyEvent;
 

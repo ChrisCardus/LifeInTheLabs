@@ -1,4 +1,4 @@
-package userInterface;
+package gameGraphics;
 
 public class Timer {
 
