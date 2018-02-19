@@ -39,6 +39,7 @@ public class EventManager {
 		float moralitychange = (float) event[5];
 		int energychange = (int) event[6];
 		String text = (String) event[7];
+		// UI method that takes String as a parameter, splits String into 3 and displays event
 		
 		int health = player.getHealth();
 		int social = player.getSocial();
@@ -54,7 +55,12 @@ public class EventManager {
 		morality = morality + moralitychange;
 		energy = energy + energychange;
 		
-		
+		player.setHealth(health);
+		player.setSocial(social);
+		player.setEducation(education);
+		player.setMoney(money);
+		player.setMorality(morality);
+		player.setEnergy(energy);
 		
 	}
 
