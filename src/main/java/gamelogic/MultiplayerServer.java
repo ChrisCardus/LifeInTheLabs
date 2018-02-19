@@ -3,7 +3,7 @@ package gamelogic;
 import graphics.Avatars;
 import networking.SocketServer;
 
-public class Multiplayer {
+public class MultiplayerServer {
     private Player[] Players;
     private int numberOfPlayers = 0;
     private SocketServer server = new SocketServer();

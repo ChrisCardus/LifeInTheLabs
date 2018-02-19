@@ -11,17 +11,24 @@ public class Timer implements Runnable {
 	public void run() {
 		while(time < endTime) {
 			time = System.currentTimeMillis();
+			if(time % 1000 == 0) {
+			    timeLeft((int)time);
+            }
 		}
 		
 		Day.startNewDay();
-		this.initialise();
+		this.reinitialise();
 	}
 	
-	private void initialise() {
+	private void reinitialise() {
 		System.out.println("Start a New Day!");
 		System.out.println((time - startTime) / 1000.0);
 		startTime = System.currentTimeMillis();
 		endTime = startTime + 600000;
 		time = startTime;
 	}
+
+	public int timeLeft(int time) {
+        return time;
+    }
 }

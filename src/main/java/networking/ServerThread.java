@@ -1,5 +1,7 @@
 package networking;
 
+import gamelogic.MultiplayerServer;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -66,7 +68,7 @@ public class ServerThread extends Thread {
 		String[] commands = input.split("-");
 
 		if(commands[0] == addPlayer) {
-		    //Multiplayer.addPlayer(commands[1], commands[2]);
+		    MultiplayerServer.addPlayer(commands[1], commands[2]);
         }
 	}
 
