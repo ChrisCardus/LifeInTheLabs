@@ -16,7 +16,7 @@ public class EventManager {
 	//this random percentage will be used to manage event probabilities
 	
 	//to be called on when a location is entered
-	boolean LocationEntered(Player player, String location) {
+	boolean LocationEntered(Player player, int location) {
 		int n = random.nextInt(101);
 		if (n < 40) {
 			Object[] event = locationevents.GetEvent(location);
