@@ -18,7 +18,8 @@ public class Player {
 	private float morality;
 	private int energy;
 	// the position variable is for the use of pathfinding and graphics and networking
-	public Tile position;
+	public int x;
+	public int y;
 	static public Avatars avatar;
 	static int userID;
 	static String username;
@@ -31,20 +32,15 @@ public class Player {
 		Player.avatar = avatar;
 		
 		health = 50;
-		// out of 100
 		social = 50;
-		// out of 100
 		education = 0;
-		// out of 100
 		money = 1700;
-		//no limit
 		morality = 50;
-		// out of 100
 		energy = 100;
-		// out of 100
 		
 		//Decide default position
-		position = new Tile(1,1);
+		x = 1;
+		y = 1;
 	}
 
 	public int getHealth() {
@@ -53,9 +49,6 @@ public class Player {
 	
 	public void setHealth(int health) {
 		this.health = health;
-		if(this.health > 100) {
-			this.health = 100;
-		}
 	}
 	
 	public int getSocial() {
@@ -64,9 +57,6 @@ public class Player {
 	
 	public void setSocial(int social) {
 		this.social = social;
-		if(this.social > 100) {
-			this.social = 100;
-		}
 	}
 	
 	public int getEducation() {
@@ -75,9 +65,6 @@ public class Player {
 	
 	public void setEducation(int education) {
 		this.education = education;
-		if(this.education > 100) {
-			this.education = 100;
-		}
 	}
 	
 	public int getMoney() {
@@ -89,30 +76,27 @@ public class Player {
 	}
 	
 	public float getMorality() {
-		return morality;
+	    return morality;
 	}
 	
 	public void setMorality(float morality) {
-		this.morality = morality;
-		if(this.morality > 100) {
-			this.morality = 100;
-		}
+	    this.morality = morality;
 	}
 	
 	public int getEnergy() {
-		return energy;
+	    return energy;
 	}
 	
 	public void setEnergy(int energy) {
-		this.energy = energy;
-		if(this.energy > 100) {
-			this.energy = 100;
-		}
+	    this.energy = energy;
 	}
 	
 	public int getID() {
 		return userID;
 	}
 	
-
+    public void setPosition(int x, int y) {
+	    this.x = x;
+	    this.y = y;
+    }
 }
