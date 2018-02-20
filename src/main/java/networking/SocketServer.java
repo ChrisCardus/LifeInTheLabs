@@ -71,12 +71,21 @@ public class SocketServer{
         listening = true;
     }
 
+    /**
+     * Sends a string of commands contained in output to every client.
+     * @param output A string of commands to send.
+     */
     public void sendAll(String output) {
         for(int i = 0; threads[i] != null; i++) {
             threads[i].send(output);
         }
     }
 
+    /**
+     * Sends a string of commands contained in output to a specified client.
+     * @param userID The ID of the client you want to communicate with.
+     * @param output A string of commands to send.s
+     */
     public void send(int userID, String output) {
         threads[userID].send(output);
     }

@@ -92,6 +92,10 @@ public class ServerThread extends Thread {
         }
 	}
 
+	/**
+	 * Sends the string of commands contained in output to the client.
+	 * @param output A string of commands.
+	 */
 	public void send(String output) {
         outLine = output;
     }
