@@ -1,7 +1,5 @@
 package gamelogic;
 
-import java.awt.Point;
-
 import graphics.Avatars;
 
 /**

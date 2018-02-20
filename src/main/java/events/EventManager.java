@@ -2,7 +2,6 @@ package events;
 
 import java.util.Random;
 import gamelogic.Player;
-import events.LocationEvents;
 
 /**
  * The class EventManager is for calling event arrays and displaying them in the game
