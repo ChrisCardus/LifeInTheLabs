@@ -17,7 +17,6 @@ public class LocationEvents {
 	public String[] EventString4 = {"You're in the labs and working on an assignment. Your friend turns to you and asks for help. He doesn't want to cheat off you - just get some pointers - but you're worried it'll count as plagiarism. What do you do?", "Give Some Pointers", "Play it Safe.", "Your pointers aren't quite enough - he comes back for troubleshooting help a few times - but eventually you've both submitted and can finally go home.", "You tell him you can't explain it, and he should figure it out for himself. He'll probably be fine on his own…?"};
 	public String[] EventString5 = {"You're working when suddenly you receive a notification saying the lecture times for Friday have been moved to this evening! You should be working then, but maybe you can ask your manager to let you off a little early? What do you do?", "Ask.", "Don't Ask.", "Your manager lets you go but seems a little disgruntled. On the other hand, the lecture is very interesting and seems vital to the next assignment.", "			You can always panopto it later. You stay at work and as your shift is about to end it gets super busy. You are offered an extra hours work for double pay since they're understaffed - You say yes!"};
 	
-	
 	public int[][] Event1 = {
 			{0, 10, -5},
 			{0, 0, 5},
