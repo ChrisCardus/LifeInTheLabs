@@ -12,30 +12,24 @@ import events.LocationEvents;
 public class EventManager {
 	Random random = new Random();
 	private LocationEvents locationevents;
+	private NormalLocation normallocation;
 	
 	//this random percentage will be used to manage event probabilities
 	
 	//to be called on when a location is entered
-	boolean LocationEntered(Player player, int location) {
+	String LocationEntered(Player player, int location) {
 		int n = random.nextInt(101);
 		if (n < 40) {
 			int[][] event = locationevents.GetEvent(location);
-			RunEvent(event);
-			return true;
+			return null;
 		}
 		else {
-			return false;
+			int[][] locevent = normallocation.GetEvent(location);
+			UpdateAttributes(locevent, 1, player);
+			return null;
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	void RunEvent(Object[] event) {
-		// Change attributes, signal to UI to display text box
-		// Object[1] = Health, 2 = Social, 3 = Education, 4 = Money, 5 = Morality, 6 = Energy, 7 = Text, 8 = Location
-		String text = (String) event[7];
-		// UI method that takes String as a parameter, splits String into 3 and displays event
-		
-	}
 	void UpdateAttributes(int[][] event, int choice, Player player) {	
 
 		int healthchange = event[choice][1];
