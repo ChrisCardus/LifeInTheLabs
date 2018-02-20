@@ -1,6 +1,10 @@
 package networking;
 
+import gamelogic.MultiplayerServer;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 
 /**
@@ -11,24 +15,17 @@ public class SocketServer{
 	
 	// Determines if the server is listening for new clients.
 	private boolean listening = true;
-	
+	private ServerThread[] threads = new ServerThread[10];
+	private int counter = 0;
+	private MultiplayerServer game;
+
     /**
      * Starts a socket and listens for new clients.
      * @param port Specifies what port number to use.
      */
-    public void startServer(int port) {
-        System.out.println("Start Server");
+    public void startServer(int port, MultiplayerServer game) {
+        this.game = game;
         this.openSocket(port);
-    }
-    
-    /**
-     * Starts a socket and listens for new clients.
-     * Uses the default port 49100.
-     */
-    public void startServer() {
-        System.out.println("Start Server");
-    	int defaultPort = 49100;
-    	this.openSocket(defaultPort);
     }
     
     /**
@@ -38,15 +35,19 @@ public class SocketServer{
     private void openSocket(int port){
         // Catch any network errors that might occur.
         try {
-            System.out.println("Openning Socket");
         	// Create the server socket.
             ServerSocket serverSocket = new ServerSocket(port);
             
             // Listen for new clients.
             while(listening) {
             	// Create a new thread to deal with each client that tries to connect.
-                System.out.println("Listening");
-            	new ServerThread(serverSocket.accept()).start();
+                System.out.println("Listening...");
+            	threads[counter] = new ServerThread(serverSocket.accept(), counter, game);
+            	threads[counter].start();
+            	counter++;
+            	if(counter >= 10) {
+            	    this.stopListening();
+                }
                 System.out.println("Client Connected");
             }
 
@@ -69,7 +70,22 @@ public class SocketServer{
         listening = true;
     }
 
-    /*public void send(String ouput) {
-        ServerThread.send("Test");
-    }*/
+    /**
+     * Sends a string of commands contained in output to every client.
+     * @param output A string of commands to send.
+     */
+    public void sendAll(String output) {
+        for(int i = 0; threads[i] != null; i++) {
+            threads[i].send(output);
+        }
+    }
+
+    /**
+     * Sends a string of commands contained in output to a specified client.
+     * @param userID The ID of the client you want to communicate with.
+     * @param output A string of commands to send.s
+     */
+    public void send(int userID, String output) {
+        threads[userID].send(output);
+    }
 }

@@ -1,7 +1,11 @@
 package networking;
 
+import graphics.Avatars;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
+import static networking.Commands.defaultPort;
 
 public class NetworkTestClient {
     public static void main(String[] args) {
@@ -13,6 +17,7 @@ public class NetworkTestClient {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        client.connect(ip, "test");
+        Avatars avatar = new Avatars(1);
+        client.connect(ip, defaultPort, "test", avatar);
     }
 }
