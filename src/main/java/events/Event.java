@@ -10,4 +10,5 @@ public interface Event {
 	Object[] Event1 = new Object[7];
 	Object[] Event2 = new Object[7];
 	
+	public Object[] GetEvent(int location);
 }
