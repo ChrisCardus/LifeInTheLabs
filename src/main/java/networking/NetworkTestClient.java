@@ -1,5 +1,6 @@
 package networking;
 
+import gamelogic.MultiplayerClient;
 import graphics.Avatars;
 
 import java.net.InetAddress;
@@ -18,6 +19,7 @@ public class NetworkTestClient {
             e.printStackTrace();
         }
         Avatars avatar = new Avatars(1);
-        client.connect(ip, defaultPort, "test", avatar);
+        MultiplayerClient game = new MultiplayerClient();
+        client.connect(ip, defaultPort, "test", avatar, game);
     }
 }
