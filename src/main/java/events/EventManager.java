@@ -11,7 +11,6 @@ import events.LocationEvents;
 
 public class EventManager {
 	Random random = new Random();
-	private LocationEvents locationevents;
 	private NormalLocation normallocation;
 	
 	//this random percentage will be used to manage event probabilities
