@@ -13,6 +13,11 @@ public class Commands {
 	public static final String breakOp = "-";
 
     /**
+     * defaultPort is the default port value, which is 29100.
+     */
+	public static final int defaultPort = 29100;
+
+    /**
      * stop is used to shutdown the server.
      */
 	public static final String stop = "stop";
@@ -72,4 +77,10 @@ public class Commands {
      */
     public static final String position = "position"+breakOp;
     public static final String positionCompare = "position";
+
+    public static final String globalPosition = "globalPosition"+breakOp;
+    public static final String globalPositionCompare = "globalPosition";
+
+    public static final String userID = "userID"+breakOp;
+    public static final String userIDCompare = "userID";
 }

@@ -1,5 +1,6 @@
 package networking;
 
+import gamelogic.MultiplayerClient;
 import graphics.Avatars;
 
 import java.io.BufferedReader;
@@ -22,29 +23,21 @@ public class SocketClient {
     // What you send to the server.
     private String outLine = "";
 
+    // Send output to server.
+    private PrintWriter out;
+
+    MultiplayerClient game = new MultiplayerClient();
+
 	/**
 	 * Open a socket and attempt to connect to a server.
 	 * @param address User specified IP address of a server.
 	 * @param port User specified port on the server.
 	 */
-	public void connect(InetAddress address, int port, String username, Avatars avatar) {
-        System.out.println("Connect");
+	public void connect(InetAddress address, int port, String username, Avatars avatar, MultiplayerClient game) {
         this.username = username;
         this.avatar = Avatars.toInt(avatar);
+        this.game = game;
         this.openSocket(address, port);
-	}
-	
-	/**
-	 * Open a socket and attempt to connect to a server.
-	 * Uses the default port 49100.
-	 * @param address User specified IP address of a server.
-	 */
-	public void connect(InetAddress address, String username, Avatars avatar) {
-		int defaultPort = 49100;
-        this.username = username;
-        System.out.println("Connect");
-        this.avatar = Avatars.toInt(avatar);
-        this.openSocket(address, defaultPort);
 	}
 	
 	/**
@@ -56,36 +49,19 @@ public class SocketClient {
 		try {
 			// Create a client side socket.
 			Socket clientSocket = new Socket(address, port);
-			// Send output to server.
-			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			// Read input from server.
 			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			
+
+			this.out = new PrintWriter(clientSocket.getOutputStream(), true);
 			// What you get from the server.
 			String inLine = "";
-			boolean init = false;
-			
-			while((inLine = in.readLine()) != null) {
 
-                System.out.println("Waiting for server");
+            addPlayer(username, avatar);
+            out.println(outLine);
+            outLine = "";
 
+			while((inLine = in.readLine()) != stop) {
                 recieve(inLine);
-
-			    if(init = false) {
-                    addPlayer(username, avatar);
-                    out.println(outLine);
-                    outLine = "";
-                    init = true;
-                }
-
-                if(outLine != "") {
-			        out.println(outLine);
-			        outLine = "";
-                }
-
-				if(inLine == Commands.stop) {
-                    break;
-                }
 			}
 		} catch(IOException e) {
 			System.err.println("There is an error with the connection: " + e);
@@ -107,6 +83,8 @@ public class SocketClient {
      */
     private void addPlayer(String username, int avatar) {
         outLine = addPlayer+username+breakOp+avatar+breakOp;
+        out.println(outLine);
+        outLine = "";
     }
 
     /**
@@ -115,6 +93,8 @@ public class SocketClient {
      */
     public void updateHealth(int newHealth) {
 	    outLine = health+Integer.toString(newHealth)+breakOp;
+        out.println(outLine);
+        outLine = "";
     }
 
     /**
@@ -123,6 +103,8 @@ public class SocketClient {
      */
     public void updateEducation(int newEducation) {
         outLine = education+Integer.toString(newEducation)+breakOp;
+        out.println(outLine);
+        outLine = "";
     }
 
     /**
@@ -131,6 +113,8 @@ public class SocketClient {
      */
     public void updateSocial(int newSocial) {
         outLine = social+Integer.toString(newSocial)+breakOp;
+        out.println(outLine);
+        outLine = "";
     }
 
     /**
@@ -139,6 +123,14 @@ public class SocketClient {
      */
     public void updateMoney(int newMoney) {
         outLine = money+Integer.toString(newMoney)+breakOp;
+        out.println(outLine);
+        outLine = "";
+    }
+
+    public void updatePosition(int x, int y) {
+        outLine = position+x+breakOp+y+breakOp;
+        out.println(outLine);
+        outLine = "";
     }
 
     /**
@@ -147,6 +139,14 @@ public class SocketClient {
      */
     private void recieve(String inLine) {
         String[] commands = inLine.split("-");
+
+        if(commands[0].equals(globalPositionCompare)) {
+            game.updateLocation(Integer.parseInt(commands[1]), Integer.parseInt(commands[2]), Integer.parseInt(commands[3]));
+        }
+
+        if(commands[0].equals(userID)) {
+            game.setUserID(Integer.parseInt(commands[1]));
+        }
     }
 
 }

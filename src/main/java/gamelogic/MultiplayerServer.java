@@ -3,12 +3,15 @@ package gamelogic;
 import graphics.Avatars;
 import networking.SocketServer;
 
+import static networking.Commands.breakOp;
+import static networking.Commands.globalPosition;
+
 /**
  * Contains the main code for the server to host a multiplayer game.
  * @author Chris Cardus
  */
 public class MultiplayerServer {
-    private Player[] players;
+    private Player[] players = new Player[10];
     private SocketServer server = new SocketServer();
 
     /**
@@ -28,6 +31,7 @@ public class MultiplayerServer {
     public void addPlayer(int userID, String username, int avatar) {
         Player player = new Player(username, userID, Avatars.fromInt(avatar));
         players[userID] = player;
+        System.out.println("User " + userID + " added to the game.");
     }
 
     /**
@@ -64,5 +68,10 @@ public class MultiplayerServer {
      */
     public void changeMoney(int userID, int newMoney) {
         players[userID].setMoney(newMoney);
+    }
+
+    public void updatePosition(int userID, int x, int y) {
+        players[userID].setPosition(x, y);
+        server.sendAll(globalPosition+userID+breakOp+x+breakOp+y+breakOp);
     }
 }

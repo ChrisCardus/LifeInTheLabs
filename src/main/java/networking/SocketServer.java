@@ -24,7 +24,7 @@ public class SocketServer{
      * @param port Specifies what port number to use.
      */
     public void startServer(int port, MultiplayerServer game) {
-        System.out.println("Start Server");
+        this.game = game;
         this.openSocket(port);
     }
     
@@ -35,14 +35,13 @@ public class SocketServer{
     private void openSocket(int port){
         // Catch any network errors that might occur.
         try {
-            System.out.println("Openning Socket");
         	// Create the server socket.
             ServerSocket serverSocket = new ServerSocket(port);
             
             // Listen for new clients.
             while(listening) {
             	// Create a new thread to deal with each client that tries to connect.
-                System.out.println("Listening");
+                System.out.println("Listening...");
             	threads[counter] = new ServerThread(serverSocket.accept(), counter, game);
             	threads[counter].start();
             	counter++;

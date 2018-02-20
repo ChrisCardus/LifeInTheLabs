@@ -18,7 +18,8 @@ public class Player {
 	private float morality;
 	private int energy;
 	// the position variable is for the use of pathfinding and graphics and networking
-	public Point position;
+	public int x;
+	public int y;
 	static public Avatars avatar;
 	static int userID;
 	static String username;
@@ -38,7 +39,8 @@ public class Player {
 		energy = 100;
 		
 		//Decide default position
-		position = new Point(1,1);
+		x = 1;
+		y = 1;
 	}
 
 	public int getHealth() {
@@ -74,24 +76,27 @@ public class Player {
 	}
 	
 	public float getMorality() {
-		return morality;
+	    return morality;
 	}
 	
 	public void setMorality(float morality) {
-		this.morality = morality;
+	    this.morality = morality;
 	}
 	
 	public int getEnergy() {
-		return energy;
+	    return energy;
 	}
 	
 	public void setEnergy(int energy) {
-		this.energy = energy;
+	    this.energy = energy;
 	}
 	
 	public int getID() {
 		return userID;
 	}
 	
-
+    public void setPosition(int x, int y) {
+	    this.x = x;
+	    this.y = y;
+    }
 }

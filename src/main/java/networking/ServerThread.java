@@ -17,9 +17,9 @@ import static networking.Commands.*;
 public class ServerThread extends Thread {
 	// Initialise the socked variable
 	private Socket socket = null;
-	private String outLine;
 	private int userID;
 	private MultiplayerServer game;
+	PrintWriter out;
 	
 	/**
 	 * Creates a new thread to handle a new client.
@@ -31,7 +31,6 @@ public class ServerThread extends Thread {
 		this.socket = socket;
 		this.userID = userID;
 		this.game = game;
-		System.out.println("Start Server");
 	}
 	
 	/**
@@ -41,22 +40,16 @@ public class ServerThread extends Thread {
 		
 		try {
 			// Send output to client.
-			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+			out = new PrintWriter(socket.getOutputStream(), true);
 			// Read input from client.
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
 			// What you get from the client.
 			String inLine = "";
-			// What you send to the client.
-			outLine = "";
 			
 			// While commands are coming from the server.
 			while((inLine = in.readLine()) != null) {
 				recieve(inLine);
-				if(outLine != "") {
-				    out.println(outLine);
-				    outLine = "";
-                }
 			}
 		} catch(IOException e) {
 			System.out.println("Something went wrong with one of the server threads: " + e);
@@ -69,26 +62,36 @@ public class ServerThread extends Thread {
      * @param input The input from the client.
      */
 	private void recieve(String input) {
+		System.out.println("Input recieved from client: "+input);
 		String[] commands = input.split("-");
 
-		if(commands[0] == addPlayerCompare) {
-		    game.addPlayer(userID, commands[1], Integer.parseInt(commands[2]));
+		for(int i = 0; i < commands.length; i++) {
+		    System.out.println("commands["+i+"] == " + commands[i]);
         }
 
-        if(commands[0] == healthCompare) {
+        if(commands[0].equals(addPlayerCompare)) {
+		    game.addPlayer(userID, commands[1], Integer.parseInt(commands[2]));
+		    send(Commands.userID+userID+breakOp);
+        }
+
+        if(commands[0].equals(healthCompare)) {
 		    game.changeHealth(userID, Integer.parseInt(commands[1]));
         }
 
-        if(commands[0] == educationCompare) {
+        if(commands[0].equals(educationCompare)) {
 		    game.changeEducation(userID, Integer.parseInt(commands[1]));
         }
 
-        if(commands[0] == socialCompare) {
+        if(commands[0].equals(socialCompare)) {
 		    game.changeSocial(userID, Integer.parseInt(commands[1]));
         }
 
-        if(commands[0] == moneyCompare) {
+        if(commands[0].equals(moneyCompare)) {
 		    game.changeMoney(userID, Integer.parseInt(commands[1]));
+        }
+
+        if(commands[0].equals(positionCompare)) {
+		    game.updatePosition(userID, Integer.parseInt(commands[1]), Integer.parseInt(commands[2]));
         }
 	}
 
@@ -97,7 +100,7 @@ public class ServerThread extends Thread {
 	 * @param output A string of commands.
 	 */
 	public void send(String output) {
-        outLine = output;
+        out.println(output);
     }
 
 }
