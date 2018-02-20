@@ -20,7 +20,6 @@ public class EventManager {
 	String LocationEntered(Player player, int location) {
 		int n = random.nextInt(101);
 		if (n < 40) {
-			int[][] event = locationevents.GetEvent(location);
 			return null;
 		}
 		else {

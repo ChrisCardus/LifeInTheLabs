@@ -84,6 +84,10 @@ public class LocationEvents {
 		}
 		
 	}
+	
+	String GetEventString(int location) {
+		
+	}
 }
 
 	
