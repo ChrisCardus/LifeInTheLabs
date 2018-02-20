@@ -1,5 +1,7 @@
 package networking;
 
+import graphics.Avatars;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,8 +9,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import static networking.Commands.addPlayer;
-import static networking.Commands.breakOp;
+import static networking.Commands.*;
 
 /**
  * Opens a client-side socket and attempts to connect to a specified server.
@@ -16,19 +17,21 @@ import static networking.Commands.breakOp;
  */
 public class SocketClient {
 
-    String username;
-    int avatar;
+    private String username;
+    private int avatar;
+    // What you send to the server.
+    private String outLine = "";
 
 	/**
 	 * Open a socket and attempt to connect to a server.
 	 * @param address User specified IP address of a server.
 	 * @param port User specified port on the server.
 	 */
-	public void connect(InetAddress address, int port, String username/*, Avatars avatar*/) {
+	public void connect(InetAddress address, int port, String username, Avatars avatar) {
         System.out.println("Connect");
         this.username = username;
+        this.avatar = Avatars.toInt(avatar);
         this.openSocket(address, port);
-	    //this.avatar = avatar.toInt();
 	}
 	
 	/**
@@ -36,12 +39,12 @@ public class SocketClient {
 	 * Uses the default port 49100.
 	 * @param address User specified IP address of a server.
 	 */
-	public void connect(InetAddress address, String username/*, Avatars avatar*/) {
+	public void connect(InetAddress address, String username, Avatars avatar) {
 		int defaultPort = 49100;
         this.username = username;
         System.out.println("Connect");
+        this.avatar = Avatars.toInt(avatar);
         this.openSocket(address, defaultPort);
-        //this.avatar = avatar.toInt();
 	}
 	
 	/**
@@ -60,18 +63,24 @@ public class SocketClient {
 			
 			// What you get from the server.
 			String inLine = "";
-			// What you send to the server.
-			String outLine = "";
 			boolean init = false;
 			
 			while((inLine = in.readLine()) != null) {
 
                 System.out.println("Waiting for server");
 
+                recieve(inLine);
+
 			    if(init = false) {
-			        outLine = addPlayer+breakOp+username+breakOp+avatar+breakOp;
+                    addPlayer(username, avatar);
+                    out.println(outLine);
+                    outLine = "";
+                    init = true;
+                }
+
+                if(outLine != "") {
 			        out.println(outLine);
-			        init = true;
+			        outLine = "";
                 }
 
 				if(inLine == Commands.stop) {
@@ -82,5 +91,33 @@ public class SocketClient {
 			System.err.println("There is an error with the connection: " + e);
 		}
 	}
-	
+
+    private void send(String output) {
+        outLine = output;
+    }
+
+    private void addPlayer(String username, int avatar) {
+        outLine = addPlayer+username+breakOp+avatar+breakOp;
+    }
+
+    public void updateHealth(int newHealth) {
+	    outLine = health+Integer.toString(newHealth)+breakOp;
+    }
+
+    public void updateEducation(int newEducation) {
+        outLine = education+Integer.toString(newEducation)+breakOp;
+    }
+
+    public void updateSocial(int newSocial) {
+        outLine = social+Integer.toString(newSocial)+breakOp;
+    }
+
+    public void updateMoney(int newMoney) {
+        outLine = money+Integer.toString(newMoney)+breakOp;
+    }
+
+    private void recieve(String inLine) {
+
+    }
+
 }

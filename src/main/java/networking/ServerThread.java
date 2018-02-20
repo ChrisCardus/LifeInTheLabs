@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import static networking.Commands.addPlayer;
+import static networking.Commands.*;
 
 /**
  * Creates a new thread for each new client that connects.
@@ -17,16 +17,20 @@ import static networking.Commands.addPlayer;
 public class ServerThread extends Thread {
 	// Initialise the socked variable
 	private Socket socket = null;
-	String outLine;
+	private String outLine;
+	private int userID;
+	private MultiplayerServer game;
 	
 	/**
 	 * Creates a new thread to handle a new client.
 	 * This is how the server handles multiple clients.
 	 * @param socket A new socket object to handle the new client.
 	 */
-	public ServerThread(Socket socket) {
+	public ServerThread(Socket socket, int userID, MultiplayerServer game) {
 		super("ServerThread");
 		this.socket = socket;
+		this.userID = userID;
+		this.game = game;
 		System.out.println("Start Server");
 	}
 	
@@ -67,8 +71,24 @@ public class ServerThread extends Thread {
 	private void recieve(String input) {
 		String[] commands = input.split("-");
 
-		if(commands[0] == addPlayer) {
-		    //MultiplayerServer.addPlayer(commands[1], commands[2]);
+		if(commands[0] == addPlayerCompare) {
+		    game.addPlayer(userID, commands[1], Integer.parseInt(commands[2]));
+        }
+
+        if(commands[0] == healthCompare) {
+		    game.changeHealth(userID, Integer.parseInt(commands[1]));
+        }
+
+        if(commands[0] == educationCompare) {
+		    game.changeEducation(userID, Integer.parseInt(commands[1]));
+        }
+
+        if(commands[0] == socialCompare) {
+		    game.changeSocial(userID, Integer.parseInt(commands[1]));
+        }
+
+        if(commands[0] == moneyCompare) {
+		    game.changeMoney(userID, Integer.parseInt(commands[1]));
         }
 	}
 

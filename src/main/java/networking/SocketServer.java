@@ -1,6 +1,10 @@
 package networking;
 
+import gamelogic.MultiplayerServer;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 
 /**
@@ -11,24 +15,17 @@ public class SocketServer{
 	
 	// Determines if the server is listening for new clients.
 	private boolean listening = true;
-	
+	private ServerThread[] threads = new ServerThread[10];
+	private int counter = 0;
+	private MultiplayerServer game;
+
     /**
      * Starts a socket and listens for new clients.
      * @param port Specifies what port number to use.
      */
-    public void startServer(int port) {
+    public void startServer(int port, MultiplayerServer game) {
         System.out.println("Start Server");
         this.openSocket(port);
-    }
-    
-    /**
-     * Starts a socket and listens for new clients.
-     * Uses the default port 49100.
-     */
-    public void startServer() {
-        System.out.println("Start Server");
-    	int defaultPort = 49100;
-    	this.openSocket(defaultPort);
     }
     
     /**
@@ -46,7 +43,12 @@ public class SocketServer{
             while(listening) {
             	// Create a new thread to deal with each client that tries to connect.
                 System.out.println("Listening");
-            	new ServerThread(serverSocket.accept()).start();
+            	threads[counter] = new ServerThread(serverSocket.accept(), counter, game);
+            	threads[counter].start();
+            	counter++;
+            	if(counter >= 10) {
+            	    this.stopListening();
+                }
                 System.out.println("Client Connected");
             }
 
@@ -69,7 +71,13 @@ public class SocketServer{
         listening = true;
     }
 
-    /*public void send(String ouput) {
-        ServerThread.send("Test");
-    }*/
+    public void sendAll(String output) {
+        for(int i = 0; threads[i] != null; i++) {
+            threads[i].send(output);
+        }
+    }
+
+    public void send(int userID, String output) {
+        threads[userID].send(output);
+    }
 }
