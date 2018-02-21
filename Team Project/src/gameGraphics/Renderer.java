@@ -82,7 +82,7 @@ public class Renderer {
 		
 		private static void makeFullscreen(){
 			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			GraphicsDevice gd = env.getDefaultScreenDevice();		//give access to graphics
+			GraphicsDevice gd = env.getDefaultScreenDevice();		//give access to com.graphics
 			
 			if(gd.isFullScreenSupported()){
 				frame.setUndecorated(true);
@@ -137,7 +137,7 @@ public class Renderer {
 				public void run(){
 					GraphicsConfiguration gc = panel.getGraphicsConfiguration();
 					
-					/**We are using VolatileImage because it is hardware accelerated, so it will make the graphics much faster.
+					/**We are using VolatileImage because it is hardware accelerated, so it will make the com.graphics much faster.
 					 * The image is volatile because its contents could disappear at any moment.
 					 */
 					VolatileImage vImage = gc.createCompatibleVolatileImage(gameWidth, gameHeight);

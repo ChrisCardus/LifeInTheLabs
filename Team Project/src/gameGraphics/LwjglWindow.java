@@ -78,7 +78,7 @@ public class LwjglWindow implements Window {
 			
 			GL11.glEnable(GL11.GL_TEXTURE_2D);		//Enable 2D textures
 		
-			GL11.glDisable(GL11.GL_DEPTH_TEST); 	//Disable depth test because we use 2D graphics
+			GL11.glDisable(GL11.GL_DEPTH_TEST); 	//Disable depth test because we use 2D com.graphics
 			
 			GL11.glMatrixMode(GL11.GL_PROJECTION); 	
 			GL11.glLoadIdentity();

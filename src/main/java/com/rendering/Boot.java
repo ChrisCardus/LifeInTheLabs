@@ -2,8 +2,8 @@ package com.rendering;
 
 import org.lwjgl.opengl.Display;
 
-import ui.Game;
-import ui.StateManager;
+import com.ui.Game;
+import com.ui.StateManager;
 
 import static com.rendering.Creator.*;
 
