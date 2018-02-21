@@ -7,6 +7,11 @@ import com.rendering.TileType;
 
 import org.lwjgl.input.Mouse;
 
+/**
+ * For controlling player movement and actions
+ * @author Olivia Breen and William Walter
+ */
+
 public class PlayerController {
 
     private TileGrid grid;

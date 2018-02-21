@@ -10,7 +10,7 @@ import com.graphics.Avatars;
 
 /**
  * For storing player data and functionality.
- * @author Olivia Breen
+ * @author Olivia Breen and William Walter
  */
 
 public class Player {
@@ -32,6 +32,8 @@ public class Player {
 	static String username;
     // startTile object is for the use of pathfinding and com.graphics and com.networking
 	private Tile startTile;
+	private int singlevsmultiplayer;
+	//set to 1 if single, 2 if multi
 
 
 	
