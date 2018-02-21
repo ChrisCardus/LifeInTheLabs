@@ -17,14 +17,17 @@ public class Player {
 
     private int width, height;
 	private float x, y, speed;
+	
 	private int health;
 	private int social;
 	private int education;
 	private int money;
 	private float morality;
 	private int energy;
+	
 	private Texture texture;
 	private boolean first = true;
+	
 	static int userID;
 	static String username;
     // startTile object is for the use of pathfinding and com.graphics and com.networking
