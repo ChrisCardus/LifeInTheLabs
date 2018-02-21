@@ -6,9 +6,5 @@ package com.events;
  */
 public interface Event {
 	
-	Object[] Event0 = new Object[7];
-	Object[] Event1 = new Object[7];
-	Object[] Event2 = new Object[7];
-	
 	public Object[] GetEvent(int location);
 }

@@ -7,7 +7,7 @@ package com.events;
  * @author Olivia Breen
  */
 
-public class LocationEvents {
+public class LocationEvents implements Event{
 	//locations: 1 Lecture, 2 Gym, 3 Home, 4 CS Building, 5 Guild
 	// Object[1] = Health, 2 = Social, 3 = Education, 4 = Money, 5 = Morality, 6 = Energy, 7 = Location
 
