@@ -1,12 +1,13 @@
 package com.rendering;
 
-import com.gamelogic.Friend;
-import com.gamelogic.Player;
 import org.lwjgl.opengl.Display;
+
+import ui.Game;
+import ui.StateManager;
 
 import static com.rendering.Creator.*;
 
-public class Boot {
+public class Boot  {
 
     public Boot(){
 
@@ -28,12 +29,20 @@ public class Boot {
         };
 
         TileGrid grid = new TileGrid(map);
+        Game game = new Game(map);
+
+
+
 
 
         Player player = new Player(QuickLoad("player"),grid.getTile(0,1), 64,64,0.5f, "Ollie", 1547484);
         Friend friend = new Friend(QuickLoad("friend"),grid.getTile(4,5), 64,64,0.5f);
 
         while ((!Display.isCloseRequested())){
+        	game.update();
+
+        	StateManager.update();
+
             Clock.update();
 
 

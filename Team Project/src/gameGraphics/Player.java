@@ -1,4 +1,4 @@
-package lwjgl;
+package gameGraphics;
 
 public class Player {
 

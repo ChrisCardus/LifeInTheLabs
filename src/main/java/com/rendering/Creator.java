@@ -57,7 +57,6 @@ public class Creator {
         GL11.glEnd();
         GL11.glLoadIdentity();
 
-
     }
 
     public static Texture LoadTexture(String path, String fileType){
@@ -75,7 +74,7 @@ public class Creator {
 
     public static Texture QuickLoad(String name) {
         Texture texture = null;
-        texture = LoadTexture("/home/will-i-am/IdeaProjects/LifeInTheLabs/src/main/resources/" + name + ".png", "PNG");
+        texture = LoadTexture("LifeInTheLabs/src/main/resources/" + name + ".png", "PNG");
         return texture;
     }
 

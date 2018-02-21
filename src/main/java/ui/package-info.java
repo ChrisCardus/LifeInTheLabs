@@ -5,4 +5,4 @@
  * @author Didos
  *
  */
-package lwjgl;
+package ui;
