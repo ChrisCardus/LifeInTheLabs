@@ -11,7 +11,9 @@ public class PlayerController {
         this.grid = grid;
     }
 
-    public void setTile(){
-
+    public void update(){
+        if (Mouse.isButtonDown(0)){
+            
+        }
     }
 }
