@@ -1,0 +1,25 @@
+package com.networking;
+
+import com.gamelogic.MultiplayerClient;
+import com.graphics.Avatars;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import static com.networking.Commands.defaultPort;
+
+public class NetworkTestClient {
+    public static void main(String[] args) {
+        System.out.println("Client Connecting");
+        SocketClient client = new SocketClient();
+        InetAddress ip = null;
+        try {
+            ip = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        Avatars avatar = new Avatars(1);
+        MultiplayerClient game = new MultiplayerClient();
+        client.connect(ip, defaultPort, "test", avatar, game);
+    }
+}
