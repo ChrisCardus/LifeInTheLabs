@@ -1,10 +1,14 @@
 package com.rendering;
 
+
 import org.lwjgl.opengl.Display;
+
+import ui.Game;
+import ui.StateManager;
 
 import static com.rendering.Creator.*;
 
-public class Boot {
+public class Boot  {
 
     public Boot(){
 
@@ -22,8 +26,12 @@ public class Boot {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
-
+       
         TileGrid grid = new TileGrid(map);
+        Game game = new Game(map);
+     
+        
+      
 
         Tile greyTile = new Tile(0, 0, 75, 75, TileType.GreyTile);
         Tile csBuilding = new Tile(150, 150, 75, 75, TileType.CsBuilding);
@@ -32,11 +40,17 @@ public class Boot {
         Tile library = new Tile(375, 375, 75, 75, TileType.Library);
 
         while ((!Display.isCloseRequested())){
-
+        	game.update();
+        	
+        	StateManager.update();
+        	  
             grid.Draw();
 
             Display.update();
             Display.sync(60);
+           
+        
+          
         }
 
         Display.destroy();

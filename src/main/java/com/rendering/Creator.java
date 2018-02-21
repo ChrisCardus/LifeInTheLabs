@@ -26,7 +26,7 @@ public class Creator {
 
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, WIDTH, 0, HEIGHT,1 , -1);
+        GL11.glOrtho(0, WIDTH, HEIGHT, 0, 1 , -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
     }
@@ -41,6 +41,7 @@ public class Creator {
     }
 
     public static void DrawQuadTex(Texture tex, float x, float y, float width, float height){
+    	
         tex.bind();
         GL11.glTranslatef(x,y,0);
         GL11.glBegin(GL11.GL_QUADS);
@@ -61,7 +62,7 @@ public class Creator {
         Texture texture = null;
         InputStream in = ResourceLoader.getResourceAsStream(path);
         try{
-            TextureLoader.getTexture(fileType, in);
+         texture =   TextureLoader.getTexture(fileType, in);
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -72,7 +73,7 @@ public class Creator {
 
     public static Texture QuickLoad(String name) {
         Texture texture = null;
-        texture = LoadTexture("LifeInTheLabs/src/main/resources/" + name + ".png", "PNG");
+        texture = LoadTexture("C:/Users/Didos/git/zool/src/main/resources/" + name + ".png", "PNG");
         return texture;
     }
 
