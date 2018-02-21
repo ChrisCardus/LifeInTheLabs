@@ -2,13 +2,14 @@ package com.rendering;
 
 public enum TileType {
 
-    GreyTile("greyTile", true), CsBuilding("csbuilding", false), OldJoe("oldjoe", false), Library("library", false), AstonWebb("astonwebb", false);
+    GreyTile("tile", false), CsBuilding("csbuilding", true), OldJoe("oldjoe", true), Library("library", true), AstonWebb("astonwebb", true), Players("players", true)
+    , Snobs("snobs", true), Pryzm("pryzm", true), Guild("guild", true), Gym("newgym", true);
 
     String textureName;
-    boolean buildable;
+    boolean interactable;
 
-    TileType(String textureName, boolean buildable){
+    TileType(String textureName, boolean interactable){
         this.textureName = textureName;
-        this.buildable = buildable;
+        this.interactable = interactable;
     }
 }

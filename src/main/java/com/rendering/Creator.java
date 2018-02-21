@@ -13,12 +13,12 @@ import java.io.InputStream;
 
 public class Creator {
 
-    public static final int WIDTH = 1125, HEIGHT = 750;
+    public static final int WIDTH = 1280, HEIGHT = 704;
 
     public static void BeginSession(){
         Display.setTitle("Life In The Labs");
         try{
-            Display.setDisplayMode(new DisplayMode(1125, 750));
+            Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.create();
         } catch (LWJGLException e){
             e.printStackTrace();
@@ -26,9 +26,11 @@ public class Creator {
 
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, WIDTH, 0, HEIGHT,1 , -1);
+        GL11.glOrtho(0, WIDTH, HEIGHT, 0,1 , -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
     }
 
     public static void DrawQuad(float x, float y, float width, float height){
@@ -40,8 +42,8 @@ public class Creator {
         GL11.glEnd();
     }
 
-    public static void DrawQuadTex(Texture tex, float x, float y, float width, float height){
-        tex.bind();
+    public static void DrawQuadTex(Texture texture, float x, float y, float width, float height){
+        texture.bind();
         GL11.glTranslatef(x,y,0);
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glTexCoord2f(0,0);
@@ -55,13 +57,14 @@ public class Creator {
         GL11.glEnd();
         GL11.glLoadIdentity();
 
+
     }
 
     public static Texture LoadTexture(String path, String fileType){
         Texture texture = null;
         InputStream in = ResourceLoader.getResourceAsStream(path);
         try{
-            TextureLoader.getTexture(fileType, in);
+            texture = TextureLoader.getTexture(fileType, in);
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -72,7 +75,7 @@ public class Creator {
 
     public static Texture QuickLoad(String name) {
         Texture texture = null;
-        texture = LoadTexture("LifeInTheLabs/src/main/resources/" + name + ".png", "PNG");
+        texture = LoadTexture("/home/will-i-am/IdeaProjects/LifeInTheLabs/src/main/resources/" + name + ".png", "PNG");
         return texture;
     }
 

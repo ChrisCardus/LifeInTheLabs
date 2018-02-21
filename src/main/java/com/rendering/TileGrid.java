@@ -1,47 +1,82 @@
 package com.rendering;
 
+import com.pathfinding.MovingObject;
+import com.pathfinding.TileBasedMap;
+
 import static com.rendering.Creator.DrawQuadTex;
 
-public class TileGrid {
+public class TileGrid implements TileBasedMap{
 
     public Tile[][] map;
+    public int WIDTH = 15;
+    public int HEIGHT = 11;
+    private boolean[][] visited = new boolean[WIDTH][HEIGHT];
 
     public TileGrid(){
-        map = new Tile[15][10];
+        map = new Tile[WIDTH][HEIGHT];
         for (int i = 0; i < map.length; i++){
             for (int j = 0; j < map[i].length; j++){
-                map[i][j] = new Tile(i *75, j *75, 75, 75, TileType.GreyTile);
+                map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.GreyTile);
             }
         }
     }
 
     public TileGrid(int[][] newMap){
-        map = new Tile[15][10];
+        map = new Tile[WIDTH][HEIGHT];
         for (int i = 0; i < map.length; i++){
             for (int j = 0; j < map[i].length; j++){
                 switch (newMap[j][i]){
                     case 0:
-                        map[i][j] = new Tile(i *75, j *75, 75, 75, TileType.GreyTile);
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.GreyTile);
                         break;
 
                     case 1:
-                        map[i][j] = new Tile(i *75, j *75, 75, 75, TileType.AstonWebb);
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.AstonWebb);
                         break;
 
                     case 2:
-                        map[i][j] = new Tile(i *75, j *75, 75, 75, TileType.CsBuilding);
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.CsBuilding);
                         break;
 
                     case 3:
-                        map[i][j] = new Tile(i *75, j *75, 75, 75, TileType.Library);
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.Library);
                         break;
 
                     case 4:
-                        map[i][j] = new Tile(i *75, j *75, 75, 75, TileType.OldJoe);
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.OldJoe);
                         break;
+
+                    case 5:
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.Guild);
+                        break;
+
+                    case 6:
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.Snobs);
+                        break;
+
+                    case 7:
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.Players);
+                        break;
+
+                    case 8:
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.Pryzm);
+                        break;
+
+                    case 9:
+                        map[i][j] = new Tile(i *64, j *64, 64, 64, TileType.Gym);
+                        break;
+
                 }
             }
         }
+    }
+
+    public void setTile(int xCoord, int yCoord,TileType type){
+        map[xCoord][yCoord] = new Tile(xCoord*64,yCoord*64,64,64,type);
+    }
+
+    public Tile getTile(int xCoord,int yCoord) {
+        return map[xCoord][yCoord];
     }
 
     public void Draw(){
@@ -53,4 +88,30 @@ public class TileGrid {
         }
     }
 
+    public int getTilesWidth() {
+        return WIDTH;
+
+    }
+
+    public int getTilesHeight() {
+        return HEIGHT;
+    }
+
+    public void pathFinderVisited(int x, int y) {
+        visited[x][y] = true;
+
+
+    }
+
+    public boolean blocked(MovingObject mover, int x, int y) {
+        if(getTile(x,y).getX() != 0 && getTile(x,y).getY() != 0){
+            return true;
+        }
+
+        return true;
+    }
+
+    public float getCost(MovingObject mover, int sx, int sy, int tx, int ty) {
+        return (float) Math.sqrt(Math.pow((tx - sx), 2) + Math.pow((ty - sy), 2));
+    }
 }
