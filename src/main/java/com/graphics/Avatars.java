@@ -2,7 +2,8 @@ package com.graphics;
 
 public class Avatars {
 
-    private int avatar;
+    @SuppressWarnings("unused")
+	private int avatar;
 
     public Avatars(int avatar) {
         this.avatar = avatar;

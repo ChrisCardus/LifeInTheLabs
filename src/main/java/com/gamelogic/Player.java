@@ -6,7 +6,7 @@ import org.newdawn.slick.opengl.Texture;
 import static com.rendering.Clock.delta;
 import static com.rendering.Creator.DrawQuadTex;
 
-import com.com.graphics.Avatars;
+import com.graphics.Avatars;
 
 /**
  * For storing player data and functionality.
@@ -30,7 +30,7 @@ public class Player {
     // startTile object is for the use of pathfinding and com.graphics and com.networking
 	private Tile startTile;
 
-	
+
 	
 	public Player(Texture texture, Tile startTile, int width, int height, float speed, String username, int userID) {
 		
@@ -58,7 +58,7 @@ public class Player {
 		// out of 100
 		
 		//Decide default position
-
+		//position = new Tile(1,1);
 	}
 
 	public int getHealth() {
