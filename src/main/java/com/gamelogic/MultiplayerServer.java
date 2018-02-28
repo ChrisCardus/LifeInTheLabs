@@ -2,9 +2,12 @@ package com.gamelogic;
 
 import com.graphics.Avatars;
 import com.networking.SocketServer;
+import com.rendering.Tile;
 
 import static com.networking.Commands.breakOp;
 import static com.networking.Commands.globalPosition;
+
+import org.newdawn.slick.opengl.Texture;
 
 /**
  * Contains the main code for the server to host a multiplayer game.

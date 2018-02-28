@@ -2,6 +2,7 @@ package com.rendering;
 
 import org.lwjgl.opengl.Display;
 
+import com.gamelogic.Player;
 import com.ui.Game;
 import com.ui.StateManager;
 

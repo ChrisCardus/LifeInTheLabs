@@ -27,27 +27,29 @@ public class Player {
 	
 	private Texture texture;
 	private boolean first = true;
+	private Avatars avatar;
 	
 	static int userID;
 	static String username;
-    // startTile object is for the use of pathfinding and com.graphics and com.networking
+
+	// startTile object is for the use of pathfinding and com.graphics and com.networking
 	private Tile startTile;
 	private int singlevsmultiplayer;
+	
+
 	//set to 1 if single, 2 if multi
 
-
-	
-	public Player(Texture texture, Tile startTile, int width, int height, float speed, String username, int userID) {
+	public Player(String username, int userID, Avatars avatar) {
 		
 		this.username = username;
 		this.userID = userID;
-		this.texture = texture;
+		//this.texture = texture;
 		this.x = startTile.getX();
 		this.y = startTile.getY();
 		this.width = width;
 		this.height = height;
 		this.speed = speed;
-		//Player.avatar = avatar;
+		this.avatar = avatar;
 		
 		health = 50;
 		// out of 100

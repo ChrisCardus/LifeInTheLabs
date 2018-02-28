@@ -14,10 +14,13 @@ import org.lwjgl.input.Mouse;
 
 public class PlayerController {
 
-    private TileGrid grid;
-
-    public PlayerController(TileGrid grid){
+	private TileGrid grid;
+	private Player player;
+	
+	
+    public PlayerController(TileGrid grid, Player player){
         this.grid = grid;
+        this.player = player;
     }
 
     public void update(){
@@ -26,7 +29,7 @@ public class PlayerController {
             int y = Mouse.getY();
             Tile tile = grid.getTile(x, y);
             TileType type = tile.getType();
-            int location;
+            int location = 0;
             if(type == TileType.CsBuilding) {
             	location = 4;
             }
@@ -39,8 +42,7 @@ public class PlayerController {
             if(type == TileType.Gym) {
             	location = 2;
             }
-            Player player;
-			EventManager.LocationEntered(player, location)
+			EventManager.LocationEntered(player, location);
         }
     }
 }
