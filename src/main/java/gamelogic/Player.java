@@ -17,8 +17,8 @@ public class Player {
 	private int money;
 	private float morality;
 	private int energy;
-	// the position variable is for the use of pathfinding and graphics and networking
-	//public Tile position;
+	private int x;
+	private int y;
 	static public Avatars avatar;
 	static int userID;
 	static String username;
@@ -109,7 +109,13 @@ public class Player {
 			this.energy = 100;
 		}
 	}
-	
+
+	public void setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
+		System.out.println("x == "+this.x+" && y == "+this.y);
+	}
+
 	public int getID() {
 		return userID;
 	}

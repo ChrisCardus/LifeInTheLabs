@@ -16,7 +16,7 @@ import static networking.Commands.*;
  * Opens a client-side socket and attempts to connect to a specified server.
  * @author Chris Cardus
  */
-public class SocketClient {
+public class SocketClient extends Thread {
 
     private String username;
     private int avatar;
@@ -57,8 +57,6 @@ public class SocketClient {
 			String inLine = "";
 
             addPlayer(username, avatar);
-            out.println(outLine);
-            outLine = "";
 
 			while((inLine = in.readLine()) != stop) {
                 recieve(inLine);
@@ -73,7 +71,8 @@ public class SocketClient {
      * @param output A string of commands.
      */
     private void send(String output) {
-        outLine = output;
+        System.out.println("send Sending commands to server: " + output);
+        out.println(output);
     }
 
     /**
@@ -83,6 +82,7 @@ public class SocketClient {
      */
     private void addPlayer(String username, int avatar) {
         outLine = addPlayer+username+breakOp+avatar+breakOp;
+        System.out.println("addPlayer Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
@@ -93,6 +93,7 @@ public class SocketClient {
      */
     public void updateHealth(int newHealth) {
 	    outLine = health+Integer.toString(newHealth)+breakOp;
+        System.out.println("updateHealth Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
@@ -103,6 +104,7 @@ public class SocketClient {
      */
     public void updateEducation(int newEducation) {
         outLine = education+Integer.toString(newEducation)+breakOp;
+        System.out.println("updateEducation Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
@@ -113,6 +115,7 @@ public class SocketClient {
      */
     public void updateSocial(int newSocial) {
         outLine = social+Integer.toString(newSocial)+breakOp;
+        System.out.println("updateSocial Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
@@ -123,12 +126,14 @@ public class SocketClient {
      */
     public void updateMoney(int newMoney) {
         outLine = money+Integer.toString(newMoney)+breakOp;
+        System.out.println("updateMoney Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
 
     public void updatePosition(int x, int y) {
         outLine = position+x+breakOp+y+breakOp;
+        System.out.println("updatePosition Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
@@ -144,7 +149,7 @@ public class SocketClient {
             game.updateLocation(Integer.parseInt(commands[1]), Integer.parseInt(commands[2]), Integer.parseInt(commands[3]));
         }
 
-        if(commands[0].equals(userID)) {
+        if(commands[0].equals(userIDCompare)) {
             game.setUserID(Integer.parseInt(commands[1]));
         }
     }

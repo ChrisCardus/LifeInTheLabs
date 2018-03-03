@@ -86,7 +86,7 @@ public class LocationEvents {
 	}
 	
 	String GetEventString(int location) {
-		
+		return "null";
 	}
 }
 

@@ -21,5 +21,9 @@ public class NetworkTestClient {
         Avatars avatar = new Avatars(1);
         MultiplayerClient game = new MultiplayerClient();
         client.connect(ip, defaultPort, "test", avatar, game);
+        System.out.println("Attempting to change x to 3 and y to 4...");
+        client.updatePosition(3, 4);
+        System.out.println("Attempting to change x to 7 and y to 6...");
+        client.updatePosition(7, 6);
     }
 }
