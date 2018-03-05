@@ -43,12 +43,8 @@ public class Player {
 		
 		this.username = username;
 		this.userID = userID;
-		//this.texture = texture;
-		this.x = startTile.getX();
-		this.y = startTile.getY();
-		this.width = width;
-		this.height = height;
-		this.speed = speed;
+
+
 		this.avatar = avatar;
 		
 		health = 50;
@@ -66,6 +62,16 @@ public class Player {
 		
 		//Decide default position
 		//position = new Tile(1,1);
+	}
+
+	public Player(Texture texture, Tile tile, int i, int j, float f, String string, int k) {
+		this.width = i;
+		this.height = j;
+		this.speed = f;
+		this.texture = texture;
+		this.x = startTile.getX();
+		this.y = startTile.getY();
+		
 	}
 
 	public int getHealth() {
