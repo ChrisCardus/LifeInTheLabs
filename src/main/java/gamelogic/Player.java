@@ -19,16 +19,14 @@ public class Player {
 	private int energy;
 	private int x;
 	private int y;
-	static public Avatars avatar;
 	static int userID;
 	static String username;
 	
 	
-	public Player(String username, int userID, Avatars avatar) {
+	public Player(String username, int userID) {
 		
 		Player.username = username;
 		Player.userID = userID;
-		Player.avatar = avatar;
 		
 		health = 50;
 		// out of 100

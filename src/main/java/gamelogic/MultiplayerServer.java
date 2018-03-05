@@ -26,10 +26,9 @@ public class MultiplayerServer {
      * Adds a new player to the game.
      * @param userID The ID assigned to the player.
      * @param username The username which the player specified.
-     * @param avatar The avatar which the player selected.
      */
-    public void addPlayer(int userID, String username, int avatar) {
-        Player player = new Player(username, userID, Avatars.fromInt(avatar));
+    public void addPlayer(int userID, String username) {
+        Player player = new Player(username, userID);
         players[userID] = player;
         System.out.println("User " + userID + " added to the game.");
     }

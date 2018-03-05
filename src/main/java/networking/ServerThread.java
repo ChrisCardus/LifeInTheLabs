@@ -70,7 +70,7 @@ public class ServerThread extends Thread {
         }
 
         if(commands[0].equals(addPlayerCompare)) {
-		    game.addPlayer(userID, commands[1], Integer.parseInt(commands[2]));
+		    game.addPlayer(userID, commands[1]);
 		    send(Commands.userID+userID+breakOp);
         }
 

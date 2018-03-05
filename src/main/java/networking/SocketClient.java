@@ -19,23 +19,21 @@ import static networking.Commands.*;
 public class SocketClient extends Thread {
 
     private String username;
-    private int avatar;
     // What you send to the server.
     private String outLine = "";
 
     // Send output to server.
     private PrintWriter out;
 
-    MultiplayerClient game = new MultiplayerClient();
+    MultiplayerClient game;
 
 	/**
 	 * Open a socket and attempt to connect to a server.
 	 * @param address User specified IP address of a server.
 	 * @param port User specified port on the server.
 	 */
-	public void connect(InetAddress address, int port, String username, Avatars avatar, MultiplayerClient game) {
+	public SocketClient(InetAddress address, int port, String username, MultiplayerClient game) {
         this.username = username;
-        this.avatar = Avatars.toInt(avatar);
         this.game = game;
         this.openSocket(address, port);
 	}
@@ -56,7 +54,7 @@ public class SocketClient extends Thread {
 			// What you get from the server.
 			String inLine = "";
 
-            addPlayer(username, avatar);
+            addPlayer(username);
 
 			while((inLine = in.readLine()) != stop) {
                 recieve(inLine);
@@ -78,10 +76,9 @@ public class SocketClient extends Thread {
     /**
      * Specifies a username and avatar to use for this client.
      * @param username User specified username.
-     * @param avatar User chosen avatar.
      */
-    private void addPlayer(String username, int avatar) {
-        outLine = addPlayer+username+breakOp+avatar+breakOp;
+    private void addPlayer(String username) {
+        outLine = addPlayer+username+breakOp;
         System.out.println("addPlayer Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
