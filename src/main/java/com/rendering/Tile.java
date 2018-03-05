@@ -20,8 +20,8 @@ public class Tile {
 
     }
 
-    public void Draw(){
-        DrawQuadTex(texture, x, y, width, height);
+    public void draw(){
+        drawQuadTex(texture, x, y, width, height);
     }
 
 

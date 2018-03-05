@@ -1,12 +1,11 @@
 package com.gamelogic;
 
 import com.rendering.Tile;
+import com.rendering.TileGrid;
 import org.newdawn.slick.opengl.Texture;
 
-import static com.rendering.Clock.delta;
-import static com.rendering.Creator.DrawQuadTex;
-
-import com.graphics.Avatars;
+import static com.rendering.Clock.*;
+import static com.rendering.Creator.drawQuadTex;
 
 /**
  * For storing player data and functionality.
@@ -23,27 +22,26 @@ public class Player {
 	private int money;
 	private float morality;
 	private int energy;
-	private int x;
-	private int y;
 	private Texture texture;
 	private boolean first = true;
 	static int userID;
 	static String username;
     // startTile object is for the use of pathfinding and com.graphics and com.networking
 	private Tile startTile;
+	private TileGrid grid;
 
 
 	
-	public Player(Texture texture, Tile startTile, int width, int height, float speed, String username, int userID) {
+	public Player(Texture texture, String username, int userID) {
 		
 		this.username = username;
 		this.userID = userID;
 		this.texture = texture;
-		this.x = startTile.getX();
-		this.y = startTile.getY();
-		this.width = width;
-		this.height = height;
-		this.speed = speed;
+		this.x = grid.getTile(6, 6).getX();
+		this.y = grid.getTile(6, 6).getY();
+		this.width = 64;
+		this.height = 64;
+		this.speed = 0.5f;
 		//Player.avatar = avatar;
 
 		health = 50;
@@ -138,14 +136,14 @@ public class Player {
 	}
 
 	public void draw(){
-	    DrawQuadTex(texture, x, y, width, height);
+	    drawQuadTex(texture, x, y, width, height);
     }
 
     public void update(){
 	    if(first){
 	        first = false;
         } else {
-            x += delta() * speed;
+            x += getDelta() * speed;
         }
     }
 

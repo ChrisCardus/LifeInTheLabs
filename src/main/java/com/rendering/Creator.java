@@ -15,7 +15,7 @@ public class Creator {
 
     public static final int WIDTH = 1280, HEIGHT = 704;
 
-    public static void BeginSession(){
+    public static void beginSession(){
         Display.setTitle("Life In The Labs");
         try{
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
@@ -33,7 +33,7 @@ public class Creator {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
     }
 
-    public static void DrawQuad(float x, float y, float width, float height){
+    public static void drawQuad(float x, float y, float width, float height){
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glVertex2f(x, y);
         GL11.glVertex2f(x + width, y);
@@ -42,7 +42,7 @@ public class Creator {
         GL11.glEnd();
     }
 
-    public static void DrawQuadTex(Texture texture, float x, float y, float width, float height){
+    public static void drawQuadTex(Texture texture, float x, float y, float width, float height){
         texture.bind();
         GL11.glTranslatef(x,y,0);
         GL11.glBegin(GL11.GL_QUADS);
@@ -59,7 +59,7 @@ public class Creator {
 
     }
 
-    public static Texture LoadTexture(String path, String fileType){
+    public static Texture loadTexture(String path, String fileType){
         Texture texture = null;
         InputStream in = ResourceLoader.getResourceAsStream(path);
         try{
@@ -72,9 +72,9 @@ public class Creator {
     }
 
 
-    public static Texture QuickLoad(String name) {
+    public static Texture quickLoad(String name) {
         Texture texture = null;
-        texture = LoadTexture("LifeInTheLabs/src/main/resources/" + name + ".png", "PNG");
+        texture = loadTexture("LifeInTheLabs/src/main/resources/" + name + ".png", "PNG");
         return texture;
     }
 
