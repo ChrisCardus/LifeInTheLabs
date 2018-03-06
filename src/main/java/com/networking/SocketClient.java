@@ -27,6 +27,8 @@ public class SocketClient extends Thread {
 
     MultiplayerClient game;
 
+    private int userID;
+
 	/**
 	 * Open a socket and attempt to connect to a server.
 	 * @param address User specified IP address of a server.
@@ -147,6 +149,7 @@ public class SocketClient extends Thread {
         }
 
         if(commands[0].equals(userIDCompare)) {
+            this.userID = Integer.parseInt(commands[1]);
             game.setUserID(Integer.parseInt(commands[1]));
         }
     }

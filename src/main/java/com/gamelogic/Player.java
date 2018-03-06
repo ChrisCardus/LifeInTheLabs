@@ -3,9 +3,11 @@ package com.gamelogic;
 import com.rendering.Tile;
 import com.rendering.TileGrid;
 import org.newdawn.slick.opengl.Texture;
+import com.gamelogic.MultiplayerClient;
 
 import static com.rendering.Clock.*;
 import static com.rendering.Creator.drawQuadTex;
+import static com.rendering.Creator.quickLoad;
 
 /**
  * For storing player data and functionality.
@@ -29,14 +31,15 @@ public class Player {
     // startTile object is for the use of pathfinding and com.graphics and com.networking
 	private Tile startTile;
 	private TileGrid grid;
+	private MultiplayerClient game;
 
 
 	
-	public Player(Texture texture, String username, int userID) {
+	public Player(String username, int userID) {
 		
 		this.username = username;
 		this.userID = userID;
-		this.texture = texture;
+		this.texture = quickLoad("player");
 		this.x = grid.getTile(6, 6).getX();
 		this.y = grid.getTile(6, 6).getY();
 		this.width = 64;
@@ -61,6 +64,36 @@ public class Player {
 		//position = new Tile(1,1);
 	}
 
+	public Player(String username, int userID, MultiplayerClient game) {
+        this.username = username;
+        this.userID = userID;
+        this.texture = quickLoad("player");
+        this.x = grid.getTile(6, 6).getX();
+        this.y = grid.getTile(6, 6).getY();
+        this.width = 64;
+        this.height = 64;
+        this.speed = 0.5f;
+        //Player.avatar = avatar;
+
+        health = 50;
+        // out of 100
+        social = 50;
+        // out of 100
+        education = 0;
+        // out of 100
+        money = 1700;
+        //no limit
+        morality = 50;
+        // out of 100
+        energy = 100;
+        // out of 100
+
+        //Decide default position
+        //position = new Tile(1,1);
+
+        this.game = game;
+    }
+
 	public int getHealth() {
 		return health;
 	}
@@ -70,8 +103,9 @@ public class Player {
 		if(this.health > 100) {
 			this.health = 100;
 		}
+		game.serverHealth(this.health);
 	}
-	
+
 	public int getSocial() {
 		return social;
 	}
@@ -81,6 +115,7 @@ public class Player {
 		if(this.social > 100) {
 			this.social = 100;
 		}
+		game.serverSocial(this.social);
 	}
 	
 	public int getEducation() {
@@ -92,6 +127,7 @@ public class Player {
 		if(this.education > 100) {
 			this.education = 100;
 		}
+		game.serverEducation(this.education);
 	}
 	
 	public int getMoney() {
@@ -100,6 +136,7 @@ public class Player {
 	
 	public void setMoney(int money) {
 		this.money = money;
+		game.serverMoney(this.money);
 	}
 	
 	public float getMorality() {

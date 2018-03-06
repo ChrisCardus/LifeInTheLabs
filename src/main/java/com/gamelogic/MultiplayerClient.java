@@ -10,7 +10,7 @@ import static com.rendering.Creator.quickLoad;
 public class MultiplayerClient {
 
     int[][] positions = new int[10][2];
-    int userID;
+    int userID = -1;
     String username;
     SocketClient client;
     Boot boot;
@@ -22,9 +22,12 @@ public class MultiplayerClient {
             positions[i][1] = 6;
         }
         this.username = username;
-        //this.player = new Player(quickLoad("player"), username)
         client = new SocketClient(address, port, username, this);
-        //boot = new Boot();
+        while(userID == -1) {
+            //wait for userID to
+        }
+        this.player = new Player(username, userID);
+        boot = new Boot(player);
     }
 
     public void updateLocation(int userID, int x, int y) {
@@ -34,5 +37,21 @@ public class MultiplayerClient {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public void serverHealth(int health) {
+        client.updateHealth(health);
+    }
+
+    public void serverSocial(int social) {
+        client.updateSocial(social);
+    }
+
+    public void serverEducation(int education) {
+        client.updateEducation(education);
+    }
+
+    public void serverMoney(int money) {
+        client.updateMoney(money);
     }
 }
