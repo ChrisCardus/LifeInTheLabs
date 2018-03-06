@@ -29,15 +29,16 @@ public class Player {
 	private boolean first = true;
 	private Avatars avatar;
 	
-	static int userID;
-	static String username;
+	private int userID;
+	private String username;
 
 	// startTile object is for the use of pathfinding and com.graphics and com.networking
 	private Tile startTile;
+	//set to 1 if single, 2 if multi
 	private int singlevsmultiplayer;
 	
 
-	//set to 1 if single, 2 if multi
+
 
 	public Player(String username, int userID, Avatars avatar) {
 		
@@ -62,6 +63,7 @@ public class Player {
 		
 		//Decide default position
 		//position = new Tile(1,1);
+		
 	}
 
 	public Player(Texture texture, Tile tile, int i, int j, float f, String string, int k) {
@@ -142,8 +144,6 @@ public class Player {
 		this.y = y;
 	}
 
-
-
 	public int getID() {
 		return userID;
 	}
@@ -159,5 +159,30 @@ public class Player {
             x += delta() * speed;
         }
     }
+
+	public int getSinglevsmultiplayer() {
+		return singlevsmultiplayer;
+	}
+
+	public void setSinglevsmultiplayer(int singlevsmultiplayer) {
+		this.singlevsmultiplayer = singlevsmultiplayer;
+	}
+	
+	public int statsToScore() {
+		//10% health, 10% social, 20% money, 60% education
+		health = getHealth();
+		social = getSocial();
+		money = getMoney();
+		education = getEducation();
+		
+		health = health*120;
+		social = social*120;
+		money = money*2;
+		education = education*600;
+		
+		int score = health + social + money + education;
+		return score;
+	}
+	
 
 }
