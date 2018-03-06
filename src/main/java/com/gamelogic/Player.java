@@ -24,6 +24,7 @@ public class Player {
 	private int money;
 	private float morality;
 	private int energy;
+	private int highscore;
 	
 	private Texture texture;
 	private boolean first = true;
@@ -39,14 +40,13 @@ public class Player {
 	
 
 
+	
 
-	public Player(String username, int userID, Avatars avatar) {
+	public Player(String username, int userID) {
 		
 		this.username = username;
 		this.userID = userID;
-
-
-		this.avatar = avatar;
+		
 		
 		health = 50;
 		// out of 100
@@ -182,6 +182,16 @@ public class Player {
 		
 		int score = health + social + money + education;
 		return score;
+	}
+
+	public int getHighscore() {
+		int score = statsToScore();
+		setHighscore(score);
+		return highscore;
+	}
+
+	public void setHighscore(int highscore) {
+		this.highscore = highscore;
 	}
 	
 

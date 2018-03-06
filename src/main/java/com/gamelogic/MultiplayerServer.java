@@ -32,7 +32,7 @@ public class MultiplayerServer {
      * @param avatar The avatar which the player selected.
      */
     public void addPlayer(int userID, String username, int avatar) {
-        Player player = new Player(username, userID, Avatars.fromInt(avatar));
+        Player player = new Player(username, userID);
         players[userID] = player;
         System.out.println("User " + userID + " added to the game.");
     }
