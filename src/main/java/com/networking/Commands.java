@@ -78,9 +78,24 @@ public class Commands {
     public static final String position = "position"+breakOp;
     public static final String positionCompare = "position";
 
+    /**
+     * globalPosition is used to specify a change to another players position.
+     * globadPositionCompare should be used when comparing to parsed strings.
+     */
     public static final String globalPosition = "globalPosition"+breakOp;
     public static final String globalPositionCompare = "globalPosition";
 
+    /**
+     * userID is used to set a players userID.
+     * userIDCompare should be used when comparing to parsed strings.
+     */
     public static final String userID = "userID"+breakOp;
     public static final String userIDCompare = "userID";
+
+    /**
+     * score is used to specify a change to a players score.
+     * scoreCompare should be used when comparing to parsed strings.
+     */
+    public static final String score = "score"+breakOp;
+    public static final String scoreCompare = "score";
 }

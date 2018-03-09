@@ -37,41 +37,20 @@ public class MultiplayerServer {
     }
 
     /**
-     * Changes the health attribute of the player.
-     * @param userID The player who's health needs to change.
-     * @param newHealth The new value for the health attribute.
+     * Changes the score stat of the player.
+     * @param userID The user ID of the player.
+     * @param score The new score value.
      */
-    public void changeHealth(int userID, int newHealth) {
-        players[userID].setHealth(newHealth);
+    public void updateScore(int userID, int score) {
+        players[userID].setHighscore(score);
     }
 
     /**
-     * Changes the education attribute of the player.
-     * @param userID The player who's education needs to change.
-     * @param newEducation The new value for the education attribute.
+     * Changes the x & y coordinates of the player. Also sends the updated coordinates to all other clients.
+     * @param userID The user who has moved.
+     * @param x The new x coordinate.
+     * @param y The new y coordinate.
      */
-    public void changeEducation(int userID, int newEducation) {
-        players[userID].setEducation(newEducation);
-    }
-
-    /**
-     * Changes the social attribute of the player.
-     * @param userID The player who's social attribute needs to change.
-     * @param newSocial The new value for the social attribute.
-     */
-    public void changeSocial(int userID, int newSocial) {
-        players[userID].setSocial(newSocial);
-    }
-
-    /**
-     * Changes the money attribute of the player.
-     * @param userID The player who's money attribute needs to change.
-     * @param newMoney The new value for the money attribute.
-     */
-    public void changeMoney(int userID, int newMoney) {
-        players[userID].setMoney(newMoney);
-    }
-
     public void updatePosition(int userID, int x, int y) {
         players[userID].setPosition(x, y);
         server.sendAll(globalPosition+userID+breakOp+x+breakOp+y+breakOp);

@@ -29,7 +29,6 @@ public class Player {
 
 	private Texture texture;
 	private boolean first = true;
-	private Avatars avatar;
 
 	private int userID;
 	private String username;
@@ -56,8 +55,6 @@ public class Player {
 		this.height = 64;
 		this.speed = 0.5f;
 		//Player.avatar = avatar;
-
-
 
 		health = 50;
 		// out of 100
@@ -126,7 +123,7 @@ public class Player {
 		if(this.health > 100) {
 			this.health = 100;
 		}
-		game.serverHealth(this.health);
+		game.updateServerScore(getHighscore());
 	}
 
 	public int getSocial() {
@@ -138,7 +135,7 @@ public class Player {
 		if(this.social > 100) {
 			this.social = 100;
 		}
-		game.serverSocial(this.social);
+		game.updateServerScore(getHighscore());
 	}
 	
 	public int getEducation() {
@@ -150,7 +147,7 @@ public class Player {
 		if(this.education > 100) {
 			this.education = 100;
 		}
-		game.serverEducation(this.education);
+		game.updateServerScore(getHighscore());
 	}
 	
 	public int getMoney() {
@@ -159,7 +156,7 @@ public class Player {
 	
 	public void setMoney(int money) {
 		this.money = money;
-		game.serverMoney(this.money);
+		game.updateServerScore(getHighscore());
 	}
 	
 	public float getMorality() {
@@ -187,6 +184,7 @@ public class Player {
 	public void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
+		game.updatePosition(x, y);
 	}
 
 	public int getID() {

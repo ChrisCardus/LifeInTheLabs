@@ -7,6 +7,10 @@ import java.net.InetAddress;
 
 import static com.rendering.Creator.quickLoad;
 
+/**
+ * Contains all the client-side code for playing a multiplayer game.
+ * @author Chris Cardus
+ */
 public class MultiplayerClient {
 
     int[][] positions = new int[10][2];
@@ -16,6 +20,12 @@ public class MultiplayerClient {
     Boot boot;
     Player player;
 
+    /**
+     * Creates a new client socket and attempts to connect to a server.
+     * @param address The IP address of the server.
+     * @param port The port which the server is running through.
+     * @param username The username of the player.
+     */
     public MultiplayerClient(InetAddress address, int port, String username) {
         for(int i = 0; i < 10; i++) {
             positions[i][0] = 9;
@@ -24,34 +34,46 @@ public class MultiplayerClient {
         this.username = username;
         client = new SocketClient(address, port, username, this);
         while(userID == -1) {
-            //wait for userID to
+            //wait for userID to be returned by the server.
         }
         this.player = new Player(username, userID);
         boot = new Boot(player);
     }
 
+    /**
+     * Updates the position of the specified player.
+     * @param userID The user who has moved.
+     * @param x The new x coordinate.
+     * @param y The new y coordinate.
+     */
     public void updateLocation(int userID, int x, int y) {
         positions[userID][0] = x;
         positions[userID][1] = y;
     }
 
+    /**
+     * Updates the position of the current player.
+     * @param x The new x coordinate.
+     * @param y The new y coordinate.
+     */
+    public void updatePosition(int x, int y) {
+        updateLocation(userID, x, y);
+        client.updatePosition(x, y);
+    }
+
+    /**
+     * Sets the userID of the client.
+     * @param userID The new userID.
+     */
     public void setUserID(int userID) {
         this.userID = userID;
     }
 
-    public void serverHealth(int health) {
-        client.updateHealth(health);
-    }
-
-    public void serverSocial(int social) {
-        client.updateSocial(social);
-    }
-
-    public void serverEducation(int education) {
-        client.updateEducation(education);
-    }
-
-    public void serverMoney(int money) {
-        client.updateMoney(money);
+    /**
+     * Sets the score of the client.
+     * @param score The new score.
+     */
+    public void updateServerScore(int score) {
+        client.updateScore(score);
     }
 }

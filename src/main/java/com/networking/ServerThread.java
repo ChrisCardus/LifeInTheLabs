@@ -74,20 +74,8 @@ public class ServerThread extends Thread {
 		    send(Commands.userID+userID+breakOp);
         }
 
-        if(commands[0].equals(healthCompare)) {
-		    game.changeHealth(userID, Integer.parseInt(commands[1]));
-        }
-
-        if(commands[0].equals(educationCompare)) {
-		    game.changeEducation(userID, Integer.parseInt(commands[1]));
-        }
-
-        if(commands[0].equals(socialCompare)) {
-		    game.changeSocial(userID, Integer.parseInt(commands[1]));
-        }
-
-        if(commands[0].equals(moneyCompare)) {
-		    game.changeMoney(userID, Integer.parseInt(commands[1]));
+        if(commands[0].equals(scoreCompare)) {
+            game.updateScore(userID, Integer.parseInt(commands[1]));
         }
 
         if(commands[0].equals(positionCompare)) {

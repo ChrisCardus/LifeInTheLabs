@@ -89,6 +89,7 @@ public class SocketClient extends Thread {
     /**
      * Updates the health attribute of the current user.
      * @param newHealth The new value of the health attribute.
+     * @deprecated Use updateScore instead.
      */
     public void updateHealth(int newHealth) {
 	    outLine = health+Integer.toString(newHealth)+breakOp;
@@ -100,6 +101,7 @@ public class SocketClient extends Thread {
     /**
      * Updates the education attribute of the current user.
      * @param newEducation The new value of the education attribute.
+     * @deprecated Use updateScore instead.
      */
     public void updateEducation(int newEducation) {
         outLine = education+Integer.toString(newEducation)+breakOp;
@@ -111,10 +113,10 @@ public class SocketClient extends Thread {
     /**
      * Updates the social attribute of the current user.
      * @param newSocial The new value of the social attribute.
+     * @deprecated Use updateScore instead.
      */
     public void updateSocial(int newSocial) {
         outLine = social+Integer.toString(newSocial)+breakOp;
-        System.out.println("updateSocial Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
@@ -122,17 +124,22 @@ public class SocketClient extends Thread {
     /**
      * Updates the money attribute of the current user.
      * @param newMoney The new value of the money attribute.
+     * @deprecated Use updateScore instead.
      */
     public void updateMoney(int newMoney) {
         outLine = money+Integer.toString(newMoney)+breakOp;
-        System.out.println("updateMoney Sending commands to server: " + outLine);
         out.println(outLine);
         outLine = "";
     }
 
     public void updatePosition(int x, int y) {
         outLine = position+x+breakOp+y+breakOp;
-        System.out.println("updatePosition Sending commands to server: " + outLine);
+        out.println(outLine);
+        outLine = "";
+    }
+
+    public void updateScore(int score) {
+        outLine = Commands.score+score+breakOp;
         out.println(outLine);
         outLine = "";
     }
