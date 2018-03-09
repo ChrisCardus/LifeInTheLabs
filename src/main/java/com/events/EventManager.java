@@ -1,8 +1,8 @@
-package events;
+package com.events;
 
 import java.util.Random;
-import gamelogic.Player;
-import events.LocationEvents;
+
+import com.gamelogic.Player;
 
 /**
  * The class EventManager is for calling event arrays and displaying them in the game
@@ -10,13 +10,13 @@ import events.LocationEvents;
  */
 
 public class EventManager {
-	Random random = new Random();
-	private NormalLocation normallocation;
+	static Random random = new Random();
+	private static NormalLocation normallocation;
 	
 	//this random percentage will be used to manage event probabilities
 	
 	//to be called on when a location is entered
-	String LocationEntered(Player player, int location) {
+	public static String LocationEntered(Player player, int location) {
 		int n = random.nextInt(101);
 		if (n < 40) {
 			return null;
@@ -28,7 +28,7 @@ public class EventManager {
 		}
 	}
 	
-	void UpdateAttributes(int[][] event, int choice, Player player) {	
+	static void UpdateAttributes(int[][] event, int choice, Player player) {	
 
 		int healthchange = event[choice][1];
 		int socialchange = event[choice][2];

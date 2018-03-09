@@ -7,7 +7,7 @@ package com.events;
  * @author Olivia Breen
  */
 
-public class LocationEvents {
+public class LocationEvents implements Event{
 	//locations: 1 Lecture, 2 Gym, 3 Home, 4 CS Building, 5 Guild
 	// Object[1] = Health, 2 = Social, 3 = Education, 4 = Money, 5 = Morality, 6 = Energy, 7 = Location
 
@@ -92,8 +92,23 @@ public class LocationEvents {
 	}
 	
 	String[] GetEventString(int location) {
-		return null;
+		if(location == 1) {
+			return EventString1;
+		}
+		if(location == 2) {
+			return EventString2;
+		}
+		if(location == 3) {
+			return EventString3;
+		}
+		if(location == 4) {
+			return EventString4;
+		}
+		if(location == 5 ) {
+			return EventString5;
+		}
 		
+		return null;
 	}
 }
 

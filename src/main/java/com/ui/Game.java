@@ -1,5 +1,6 @@
 package com.ui;
 
+import com.gamelogic.Player;
 import com.rendering.TileGrid;
 
 public class Game {

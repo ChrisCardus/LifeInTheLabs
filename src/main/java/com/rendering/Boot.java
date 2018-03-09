@@ -4,6 +4,8 @@ import com.gamelogic.Friend;
 import com.gamelogic.Player;
 import org.lwjgl.opengl.Display;
 
+import com.gamelogic.Friend;
+import com.gamelogic.Player;
 import com.ui.Game;
 import com.ui.StateManager;
 

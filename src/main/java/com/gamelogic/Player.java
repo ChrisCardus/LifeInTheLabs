@@ -11,30 +11,40 @@ import static com.rendering.Creator.quickLoad;
 
 /**
  * For storing player data and functionality.
- * @author Olivia Breen
+ * @author Olivia Breen and William Walter
  */
 
 public class Player {
 
     private int width, height;
 	private float x, y, speed;
+
 	private int health;
 	private int social;
 	private int education;
 	private int money;
 	private float morality;
 	private int energy;
+	private int highscore;
+
 	private Texture texture;
 	private boolean first = true;
-	static int userID;
-	static String username;
-    // startTile object is for the use of pathfinding and com.graphics and com.networking
+	private Avatars avatar;
+
+	private int userID;
+	private String username;
+
+	// startTile object is for the use of pathfinding and com.graphics and com.networking
 	private Tile startTile;
 	private TileGrid grid;
 	private MultiplayerClient game;
+	//set to 1 if single, 2 if multi
+	private int singlevsmultiplayer;
+
 
 
 	
+
 	public Player(String username, int userID) {
 		
 		this.username = username;
@@ -46,6 +56,8 @@ public class Player {
 		this.height = 64;
 		this.speed = 0.5f;
 		//Player.avatar = avatar;
+
+
 
 		health = 50;
 		// out of 100
@@ -62,6 +74,17 @@ public class Player {
 		
 		//Decide default position
 		//position = new Tile(1,1);
+
+	}
+
+	public Player(Texture texture, Tile tile, int i, int j, float f, String string, int k) {
+		this.width = i;
+		this.height = j;
+		this.speed = f;
+		this.texture = texture;
+		this.x = startTile.getX();
+		this.y = startTile.getY();
+
 	}
 
 	public Player(String username, int userID, MultiplayerClient game) {
@@ -166,8 +189,6 @@ public class Player {
 		this.y = y;
 	}
 
-
-
 	public int getID() {
 		return userID;
 	}
@@ -183,5 +204,40 @@ public class Player {
             x += getDelta() * speed;
         }
     }
+
+	public int getSinglevsmultiplayer() {
+		return singlevsmultiplayer;
+	}
+
+	public void setSinglevsmultiplayer(int singlevsmultiplayer) {
+		this.singlevsmultiplayer = singlevsmultiplayer;
+	}
+
+	public int statsToScore() {
+		//10% health, 10% social, 20% money, 60% education
+		health = getHealth();
+		social = getSocial();
+		money = getMoney();
+		education = getEducation();
+
+		health = health*120;
+		social = social*120;
+		money = money*2;
+		education = education*600;
+
+		int score = health + social + money + education;
+		return score;
+	}
+
+	public int getHighscore() {
+		int score = statsToScore();
+		setHighscore(score);
+		return highscore;
+	}
+
+	public void setHighscore(int highscore) {
+		this.highscore = highscore;
+	}
+
 
 }

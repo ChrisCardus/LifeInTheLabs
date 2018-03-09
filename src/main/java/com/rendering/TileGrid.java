@@ -1,11 +1,10 @@
 package com.rendering;
 
-import com.pathfinding.MovingObject;
-import com.pathfinding.TileBasedMap;
-
 import static com.rendering.Creator.DrawQuadTex;
 
-public class TileGrid implements TileBasedMap{
+import com.pathFinding.MovingObject;
+
+public class TileGrid implements com.pathFinding.TileBasedMap{
 
     public Tile[][] map;
     public int WIDTH = 15;
@@ -103,15 +102,17 @@ public class TileGrid implements TileBasedMap{
 
     }
 
-    public boolean blocked(MovingObject mover, int x, int y) {
+	@Override
+	public boolean blocked(com.pathFinding.MovingObject mover, int x, int y) {
         if(getTile(x,y).getX() != 0 && getTile(x,y).getY() != 0){
             return true;
         }
 
         return true;
-    }
+	}
 
-    public float getCost(MovingObject mover, int sx, int sy, int tx, int ty) {
+	@Override
+	public float getCost(com.pathFinding.MovingObject mover, int sx, int sy, int tx, int ty) {
         return (float) Math.sqrt(Math.pow((tx - sx), 2) + Math.pow((ty - sy), 2));
-    }
+	}
 }
